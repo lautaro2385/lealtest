@@ -64,15 +64,20 @@ function handleFatalError(err) {
   process.exit(1)
 }
 
-process.on('uncaughtException', handleFatalError)
-process.on('uncaughtRejection', handleFatalError)
+if (!module.parent) {
+  process.on('uncaughtException', handleFatalError)
+  process.on('uncaughtRejection', handleFatalError)
 
-// connectDB();
+  // connectDB();
 
-db.sequalize.sync({ force: true }).then(function () {
-  debug('base de datos iniciada')
-  server.listen(process.env.PORT, () => {
-    debug(`${chalk.green('[legal-user]')} server listening ${process.env.PORT}`)
-  })
-});
+  db.sequalize.sync({ force: true }).then(function () {
+    debug('base de datos iniciada')
+    server.listen(process.env.PORT, () => {
+      debug(`${chalk.green('[legal-user]')} server listening ${process.env.PORT}`)
+    })
+  });
+}
+module.exports = server
+
+
 

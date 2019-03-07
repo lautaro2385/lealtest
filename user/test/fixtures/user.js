@@ -8,5 +8,6 @@ let user = {
 }
 
 module.exports = {
-  single: user
+  single: user,
+  loginData: { email: user.email, password: user.password }
 }

@@ -4,7 +4,10 @@ module.exports = function setupUser(UserModel) {
 
   async function create(createModel) {
     const user = await UserModel.create(createModel);
-    return user.toJSON();
+    if (user.toJSON) {
+      return user.toJSON();
+    }
+    return user
   }
 
   function findByUserId(userId) {

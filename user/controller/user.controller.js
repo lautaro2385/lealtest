@@ -57,7 +57,9 @@ async function login(modelLogin) {
   }
   //genera token
   let token = jwt.createToken(usr);
-  let resp = Object.assign({}, usr.toJSON());
+  let resp = usr;
+  if (usr.toJSON)
+    resp = Object.assign({}, usr.toJSON());
   resp.token = token;
   return resp
 }
