@@ -1,14 +1,13 @@
 'use strict'
-const { setupDatabase } = require('../../config/config.db');
+const { setupDatabase } = require('../setupDB');
 const setupUserModel = require('../model/user.entity');
 const setupUser = require('../dao/user.dao');
+const env = process.env.NODE_ENV || 'development';
+const config = require('../../config/config.db')[env];
 var db = {}
 
-console.log(setupDatabase);
-
-
-const sequalize = setupDatabase()
-const user = setupUserModel()
+const sequalize = setupDatabase(config)
+const user = setupUserModel(config)
 
 db.sequalize = sequalize
 db.user = setupUser(user)

@@ -4,9 +4,10 @@
   "description": "project for users",
   "main": "user.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "set NODE_ENV=production & node index.js",
-    "start-dev": "set DEBUG=legal:* & nodemon index.js",
+    "test": "set DEBUG=legal:*&set NODE_ENV=test&mocha --reporter spec",
+    "testnyc": "set DEBUG=legal:*&set NODE_ENV=test&nyc --reporter=lcov mocha --reporter spec",
+    "start": "set NODE_ENV=production& node index.js",
+    "start-dev": "set DEBUG=legal:*& set NODE_ENV=development& nodemon index.js",
     "lint": "standard"
   },
   "author": "",
@@ -29,9 +30,14 @@
     "sequelize": "^4.43.0"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
     "chalk": "^2.4.1",
     "debug": "^4.1.1",
+    "mocha": "^6.0.2",
     "nodemon": "^1.18.10",
+    "nyc": "^13.3.0",
+    "sqlite3": "^4.0.6",
     "standard": "^12.0.1"
   }
 }

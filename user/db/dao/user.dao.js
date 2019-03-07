@@ -8,7 +8,7 @@ module.exports = function setupUser(UserModel) {
   }
 
   function findByUserId(userId) {
-    return UserModel.findById(userId);
+    return UserModel.findByPk(userId);
   }
 
   return {

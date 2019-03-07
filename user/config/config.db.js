@@ -1,37 +1,24 @@
-const Sequelize = require('sequelize');
-const debug = require('debug')('legal:db')
-const defaults = require('defaults')
-
-let sequelize = null;
-
-module.exports.setupDatabase = function (config) {
-
-  config = defaults(config, {
+module.exports = {
+  development: {
+    username: process.env.DB_USER,
+    password: process.env.DB_PSW,
+    database: process.env.DB_NAME,
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     dialect: 'mysql',
-    operatorsAliases: false,
-    logging: d => debug(d),
-    pool: {
-      max: 5,
-      min: 0,
-      acquire: 30000,
-      idle: 10000
-    }
-  })
-
-  if (!sequelize) {
-    sequelize = new Sequelize(process.env.DB_DB, process.env.DB_USER, process.env.DB_PSW, config)
+  },
+  test: {
+    dialect: "sqlite",
+    storage: ":memory:",
+    logging: () => { }
+  },
+  production: {
+    username: process.env.DB_USER,
+    password: process.env.DB_PSW,
+    database: process.env.DB_NAME,
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    dialect: 'mysql',
+    use_env_variable: 'DATABASE_URL'
   }
-  return sequelize
-}
-/*
-sequelize
-  .authenticate()
-  .then(() => {
-    debug(`${chalk.green('[legal-db]')} Connection has been established successfully`)
-  })
-  .catch(err => {
-    debug(`${chalk.red('[legal-db]')} Unable to connect to the database. ${err}`)
-  })
-  */
+};

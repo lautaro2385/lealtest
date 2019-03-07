@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const { setupDatabase } = require('../../config/config.db');
+const { setupDatabase } = require('../setupDB');
 const { FORMAT_DATE, FORMAT_DATETIME } = require('../../config/constants');
 const moment = require('moment');
 
@@ -32,7 +32,8 @@ module.exports = function (config) {
       allowNull: false,
       validate: {
         isEmail: true
-      }
+      },
+      unique: true
     },
     password: {
       type: Sequelize.STRING,
