@@ -71,7 +71,7 @@ if (!module.parent) {
 
   // connectDB();
 
-  db.sequalize.sync({ force: true }).then(function () {
+  db.sequalize.sync({ force: process.env.NODE_ENV === 'development' }).then(function () {
     debug('base de datos iniciada')
     server.listen(process.env.PORT, () => {
       debug(`${chalk.green('[legal-user]')} server listening ${process.env.PORT}`)

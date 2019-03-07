@@ -6,15 +6,27 @@ const { buildOkResponse, buildCreatedResponse } = require('../util/util-response
 
 const api = asyncify(express.Router())
 
-api.post('/login', login)
-api.post('/user', register)
+api.get('/transaction', search)
+api.get('/transaction/history', getHistory)
+api.post('/transaction', create)
+api.delete('/transaction/:id', inactivate)
 
-async function login(req, res) {
+async function search(req, res) {
+  let data = await controller.search(req.query)
+  buildOkResponse(res, data)
+}
+
+async function getHistory(req, res) {
+  let data = await controller.getHistory()
+  buildOkResponse(res, data)
+}
+
+async function inactivate(req, res) {
   let data = await controller.login(req.body)
   buildOkResponse(res, data)
 }
 
-async function register(req, res) {
+async function create(req, res) {
   const createModel = req.body
   let resp = await controller.register(createModel)
   buildCreatedResponse(res, resp)
