@@ -2,7 +2,7 @@
 
 var jwt = require('jwt-simple')
 var moment = require('moment')
-var secret = process.env.JWT_SEED
+var secret = process.env.JWT_SEED || 'ys!a7t8ZY@-g%hgBtYqVw2jM&A&rJCR33xwqdzxLwVMzVNF5Bc'
 
 module.exports.SECRET = secret
 module.exports.createToken = function (usr) {
@@ -14,6 +14,5 @@ module.exports.createToken = function (usr) {
     iat: moment().unix(),
     exp: moment().add(process.env.JWT_EXPIRED, 'hours').unix()
   }
-
   return jwt.encode(payload, secret)
 }

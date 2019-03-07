@@ -25,6 +25,7 @@ async function register(createModel) {
   createModel = await Joi.validate(createModel, userRegisterSchema, paramSchema);
   // el id es el md5 del correo
   createModel.user_id = md5(createModel.email);
+
   // revisa si el usuario existe 
   const usr = await model.user.findByUserId(createModel.user_id);
 
@@ -50,6 +51,7 @@ async function login(modelLogin) {
   if (!usr) {
     throw createError.Unauthorized('usuario y/o contraseña inválida')
   }
+
   const val = bcrypt.compareSync(modelLogin.password, usr.password);
   // si no son iguales las contraseñas
   if (!val) {
@@ -57,9 +59,9 @@ async function login(modelLogin) {
   }
   //genera token
   let token = jwt.createToken(usr);
-  let resp = usr;
+  let resp = { user: usr };
   if (usr.toJSON)
-    resp = Object.assign({}, usr.toJSON());
+    resp.user = Object.assign({}, usr.toJSON());
   resp.token = token;
   return resp
 }
