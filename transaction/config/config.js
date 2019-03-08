@@ -9,7 +9,7 @@ process.env.DB_USER_TR = process.env.DB_USER_TR || 'root'
 process.env.DB_PSW_TR = process.env.DB_PSW_TR || 'root'
 process.env.DB_PORT_TR = process.env.DB_PORT_TR || 3307
 process.env.DB_HOST_TR = process.env.DB_HOST_TR || 'localhost'
-process.env.DB_NAME_TR = process.env.DB_NAME_TR || 'leal'
+process.env.DB_NAME_TR = process.env.DB_NAME_TR || 'leal_transaction'
 // ===============================
 // = JWT
 // ===============================

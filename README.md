@@ -7,7 +7,7 @@ Proyecto que implementa micro servicios que permite el registro y login de usuar
 
 ## Descripción
 
-La solución se implementa en 2 proyectos. Aunque se sabe que los mricro servicios son más que proyectos aislados, para el fin de estas pruebas se imeplementan los servicios de usuario y de transacciones, cada proyecto es totalmente independiente entra si, tienen sus propios servicios, inclusive su propia base de datos.
+La solución se implementa en 2 proyectos. Aunque se sabe que los mricro servicios son más que proyectos aislados, para el fin de estas pruebas se implementan los servicios de usuario y de transacciones, cada proyecto es totalmente independiente entra si, tienen sus propios servicios, inclusive su propia base de datos.
 Dadas la funcionalidades, se agrupan en dos micro servicios:
 1. __Administración de usuarios:__ Este servicio tiene las siguientes funcionalidades:
    * Registro de usuario
