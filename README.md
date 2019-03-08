@@ -58,5 +58,15 @@ con las variables de entorno:
 |      Host       |    DB_HOST     |  localhost   |      DB_HOST_TR       |      localhost      |
 | Nombre de la DB |    DB_NAME     |  leal_user   |      DB_NAME_TR       |  leal_transaction   |
 
+## API
+
+La [documentación](https://documenter.getpostman.com/view/300406/S11PsGwq) de los servicios expuestos se pueden encontar en el [link](https://documenter.getpostman.com/view/300406/S11PsGwq).
+
+Se van a encontrar todos los servicios REST expuestos pque las aplicaciones implemetan.
+
+Los puertos habilitados para el desarrollo son:
+
+* __usuarios:__ 3000
+* __transacciones:__ 3001
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/8f82301e78f91a9d37d9)
