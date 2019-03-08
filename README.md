@@ -21,3 +21,20 @@ Dadas la funcionalidades, se agrupan en dos micro servicios:
 
 ![Microservices](https://github.com/lautaro2385/lealtest/blob/master/Untitled%20Diagram.png)
 
+## Ejecución
+A continucación se describen los comandos para iniciar los proyectos en modo de pruebas, desarrollo y producción. para la ejecucion de estos comandos se debe estar en la raiz del proyecto a iniciar.
+
+Para iniciar el servicio en modo de desarrollo, se deb ejecutar:
+~~~~
+npm run start-dev
+~~~~
+
+Para iniciar el servicio en modo de producción, se deb ejecutar:
+~~~~
+npm start
+~~~~
+
+Para realizar las pruebas, se deb ejecutar:
+~~~~
+npm test
+~~~~

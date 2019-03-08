@@ -1,21 +1,20 @@
 'use strict'
-const sequelize = require('sequelize');
+const sequelize = require('sequelize')
 
-module.exports = function setupUser(TransactionModel) {
-
-  async function create(createModel) {
-    const transaction = await TransactionModel.create(createModel);
+module.exports = function setupUser (TransactionModel) {
+  async function create (createModel) {
+    const transaction = await TransactionModel.create(createModel)
     if (transaction.toJSON) {
-      return transaction.toJSON();
+      return transaction.toJSON()
     }
     return transaction
   }
 
-  function findById(id) {
-    return TransactionModel.findByPk(id);
+  function findById (id) {
+    return TransactionModel.findByPk(id)
   }
 
-  function findByUserId(userId) {
+  function findByUserId (userId) {
     return TransactionModel.findAll({
       where: {
         user_id: userId
@@ -25,10 +24,10 @@ module.exports = function setupUser(TransactionModel) {
         ['transaction_id', 'DESC']
       ],
       raw: true
-    });
+    })
   }
 
-  async function findPaginationByUserId(userId, limit, page) {
+  async function findPaginationByUserId (userId, limit, page) {
     limit = limit || 50
     page = page || 0
     let offset = limit * page
@@ -42,7 +41,7 @@ module.exports = function setupUser(TransactionModel) {
         ['created_date', 'DESC'],
         ['transaction_id', 'DESC']
       ]
-    });
+    })
     const cnt = await count({ user_id: userId })
     return {
       totalCount: cnt,
@@ -53,19 +52,19 @@ module.exports = function setupUser(TransactionModel) {
     }
   }
 
-  async function count(where) {
+  async function count (where) {
     return (await TransactionModel.findAll({
       attributes: [[sequelize.fn('COUNT', sequelize.col('*')), 'cant']],
       where
-    }))[0].cant;
+    }))[0].cant
   }
 
-  async function update(id, model) {
-    await TransactionModel.update(model, { returning: true, where: { transaction_id: id } });
+  async function update (id, model) {
+    await TransactionModel.update(model, { returning: true, where: { transaction_id: id } })
     findById(id)
   }
 
-  function sumPoints(condition) {
+  function sumPoints (condition) {
     return TransactionModel.sum('points', { where: condition })
   }
 

@@ -6,7 +6,7 @@ const HttpStatus = require('http-status-codes')
  * @param {Object} data información a devolver
  * @param {String} msg mensaje personalizado de la respuesta
  */
-function buildOkResponse(res, data, msg) {
+function buildOkResponse (res, data, msg) {
   return buildResponse(res, HttpStatus.OK, msg, data)
 }
 
@@ -16,7 +16,7 @@ function buildOkResponse(res, data, msg) {
  * @param {Object} data información a devolver, en el formato de paginación
  * @param {*} msg mensaje de respuesta
  */
-function buildOkPaginationResponse(res, data, msg) {
+function buildOkPaginationResponse (res, data, msg) {
   data.ok = true
   data.message = msg || 'ok'
   return res.status(HttpStatus.OK).send(data)
@@ -32,7 +32,7 @@ function buildOkPaginationResponse(res, data, msg) {
  * @param {*} count candidad de registros enviados
  * @param {*} msg mensaje de respuesta
  */
-function buildPaginationResponse(data, limit, page, totalCount, count) {
+function buildPaginationResponse (data, limit, page, totalCount, count) {
   return {
     limit,
     page,
@@ -48,7 +48,7 @@ function buildPaginationResponse(data, limit, page, totalCount, count) {
  * @param {Object} data información a devolver
  * @param {String} msg mensaje personalizado de la respuesta
  */
-function buildAcceptedResponse(res, data, msg) {
+function buildAcceptedResponse (res, data, msg) {
   return buildResponse(res, HttpStatus.ACCEPTED, msg, data)
 }
 
@@ -58,7 +58,7 @@ function buildAcceptedResponse(res, data, msg) {
  * @param {Object} data información a devolver
  * @param {String} msg mensaje personalizado de la respuesta
  */
-function buildCreatedResponse(res, data, msg) {
+function buildCreatedResponse (res, data, msg) {
   return buildResponse(res, HttpStatus.CREATED, msg, data)
 }
 
@@ -69,7 +69,7 @@ function buildCreatedResponse(res, data, msg) {
  * @param {String} msg mensaje personalizado de la respuesta
  * @param {String} error mensaje de error
  */
-function buildErrorResponse(res, status, msg, error) {
+function buildErrorResponse (res, status, msg, error) {
   return buildResponse(res, status, msg, null, error)
 }
 
@@ -81,7 +81,7 @@ function buildErrorResponse(res, status, msg, error) {
  * @param {String} data información a devolver
  * @param {String} error mensaje de error
  */
-function buildResponse(res, status, msgg, data, error) {
+function buildResponse (res, status, msgg, data, error) {
   let ok = false
   let msg = msgg || HttpStatus.getStatusText(status)
   let resp = {}

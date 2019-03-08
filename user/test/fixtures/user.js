@@ -1,18 +1,18 @@
 'use strict'
-const md5 = require('md5');
+const md5 = require('md5')
 const bcrypt = require('bcrypt-nodejs')
-const moment = require('moment');
-const _ = require('underscore');
-const { FORMAT_DATE, FORMAT_DATETIME } = require('../../config/constants');
+const moment = require('moment')
+const _ = require('underscore')
+const { FORMAT_DATE, FORMAT_DATETIME } = require('../../config/constants')
 
-//modelo para guardar en la base de datos
+// modelo para guardar en la base de datos
 let userDb = {
   name: 'Prueba',
   lastname: 'uno',
   birth_date: new Date(),
   email: 'prueba@uno.com',
   password: '123456',
-  user_id: md5('prueba@uno.com'),
+  user_id: md5('prueba@uno.com')
 }
 
 // modelo para enviar al solicitud al servicio rest
@@ -35,7 +35,7 @@ user1ToDb.toJSON = function () {
   return _.omit(val, ['password', 'toJSON'])
 }
 
-function explote(user, params) {
+function explote (user, params) {
   let u = Object.assign({}, user)
   return Object.assign(u, params)
 }
@@ -47,5 +47,5 @@ module.exports = {
   single2: user2,
   single2ToDb: user2ToDb,
   loginData: { email: userDb.email, password: userDb.password },
-  successCreateResponse1: { ok: true, message: "Created", data: userDb }
+  successCreateResponse1: { ok: true, message: 'Created', data: userDb }
 }

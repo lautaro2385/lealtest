@@ -1,11 +1,10 @@
-const Sequelize = require('sequelize');
+const Sequelize = require('sequelize')
 const debug = require('debug')('legal:db')
 const defaults = require('defaults')
 
-let sequelize = null;
+let sequelize = null
 
 module.exports.setupDatabase = function (config) {
-
   config = defaults(config, {
     operatorsAliases: false,
     logging: d => debug(d),

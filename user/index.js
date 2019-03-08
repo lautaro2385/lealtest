@@ -10,8 +10,7 @@ const chalk = require('chalk')
 const debug = require('debug')('legal:user')
 const HttpStatus = require('http-status-codes')
 const { buildErrorResponse } = require('./util/util-response')
-const db = require('./db/model');
-
+const db = require('./db/model')
 
 const app = asyncify(express())
 const server = http.createServer(app)
@@ -59,7 +58,7 @@ app.use((err, req, res, next) => {
   return buildErrorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, undefined, err.message)
 })
 
-function handleFatalError(err) {
+function handleFatalError (err) {
   debug(`${chalk.red('Fatal error')} ${err.message}`)
   debug(err.stack)
   process.exit(1)
@@ -76,9 +75,6 @@ if (!module.parent) {
     server.listen(process.env.PORT, () => {
       debug(`${chalk.green('[legal-user]')} server listening ${process.env.PORT}`)
     })
-  });
+  })
 }
 module.exports = server
-
-
-

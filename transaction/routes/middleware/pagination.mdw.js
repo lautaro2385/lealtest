@@ -1,6 +1,6 @@
 'use strict'
 
-function pagination(req, res, next) {
+function pagination (req, res, next) {
   let limit = req.query.limit || 50
   let page = req.query.page || 0
   try {

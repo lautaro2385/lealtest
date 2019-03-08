@@ -1,7 +1,7 @@
-const Sequelize = require('sequelize');
-const { setupDatabase } = require('../setupDB');
-const { FORMAT_DATETIME } = require('../../config/constants');
-const moment = require('moment');
+const Sequelize = require('sequelize')
+const { setupDatabase } = require('../setupDB')
+const { FORMAT_DATETIME } = require('../../config/constants')
+const moment = require('moment')
 
 module.exports = function (config) {
   const sequelize = setupDatabase(config)
@@ -28,19 +28,19 @@ module.exports = function (config) {
       allowNull: false
     }
   }, {
-      createdAt: 'created_date',
-      updatedAt: 'updated_date',
-      indexes: [
-        {
-          fields: ['created_date']
-        }
-      ]
-    })
+    createdAt: 'created_date',
+    updatedAt: 'updated_date',
+    indexes: [
+      {
+        fields: ['created_date']
+      }
+    ]
+  })
   Transaction.prototype.toJSON = function () {
-    var values = Object.assign({}, this.get());
-    if (values.updated_date) { values.updated_date = moment(values.updated_date).format(FORMAT_DATETIME); }
-    if (values.created_date) { values.created_date = moment(values.created_date).format(FORMAT_DATETIME); }
-    return values;
+    var values = Object.assign({}, this.get())
+    if (values.updated_date) { values.updated_date = moment(values.updated_date).format(FORMAT_DATETIME) }
+    if (values.created_date) { values.created_date = moment(values.created_date).format(FORMAT_DATETIME) }
+    return values
   }
   return Transaction
 }

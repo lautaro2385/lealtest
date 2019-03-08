@@ -1,16 +1,14 @@
+/* global beforeEach, afterEach, it, describe */
 'use strict'
-const moment = require('moment');
-const request = require('supertest');
-const chai = require('chai');
-const chaiAsPromised = require('chai-as-promised');
-const userFixtures = require('./fixtures/user');
-const { FORMAT_DATE } = require('../config/constants');
-const md5 = require('md5');
-const sinon = require('sinon');
-const proxyquire = require('proxyquire').noCallThru();
+const request = require('supertest')
+const chai = require('chai')
+const chaiAsPromised = require('chai-as-promised')
+const userFixtures = require('./fixtures/user')
+const sinon = require('sinon')
+const proxyquire = require('proxyquire').noCallThru()
 
-chai.use(chaiAsPromised);
-const assert = chai.assert;
+chai.use(chaiAsPromised)
+const assert = chai.assert
 
 let single = Object.assign({}, userFixtures.single2)
 let single1 = Object.assign({}, userFixtures.single1)
@@ -21,13 +19,12 @@ let dbStub = {}
 let UserStub = {}
 
 describe('pruebas api', () => {
-
   beforeEach(async () => {
     sandbox = sinon.createSandbox()
 
     const sequalizeStub = {}
-    sequalizeStub.sync = sandbox.stub();
-    sequalizeStub.sync.returns(Promise.resolve("ok"))
+    sequalizeStub.sync = sandbox.stub()
+    sequalizeStub.sync.returns(Promise.resolve('ok'))
 
     dbStub.user = UserStub
     UserStub.findByUserId = sandbox.stub()
@@ -68,13 +65,13 @@ describe('pruebas api', () => {
       .set('Accept', 'application/json')
       .expect(201)
       .end(function (err, res) {
-        if (err) return done(err);
-        assert.isTrue(res.body.ok, "respuesta debe ser ok")
-        assert.equal(res.body.message, "Created", "El mensaje deb ser creado")
-        assert(res.body.data, "debe haber informacion del usuario")
+        if (err) return done(err)
+        assert.isTrue(res.body.ok, 'respuesta debe ser ok')
+        assert.equal(res.body.message, 'Created', 'El mensaje deb ser creado')
+        assert(res.body.data, 'debe haber informacion del usuario')
         assert.deepEqual(res.body.data, userFixtures.single2ToDb.toJSON())
-        done();
-      });
+        done()
+      })
   })
 
   it('no se permite usuarios que ta existan', (done) => {
@@ -84,11 +81,11 @@ describe('pruebas api', () => {
       .set('Accept', 'application/json')
       .expect(409)
       .end(function (err, res) {
-        if (err) return done(err);
-        assert.isFalse(res.body.ok, "respuesta debe ser false")
-        assert.equal(res.body.message, "El usuario ya existe!", "El mensaje deb ser El usuario ya existe!")
-        done();
-      });
+        if (err) return done(err)
+        assert.isFalse(res.body.ok, 'respuesta debe ser false')
+        assert.equal(res.body.message, 'El usuario ya existe!', 'El mensaje deb ser El usuario ya existe!')
+        done()
+      })
   })
 
   it('POST /login', (done) => {
@@ -98,14 +95,14 @@ describe('pruebas api', () => {
       .set('Accept', 'application/json')
       .expect(200)
       .end(function (err, res) {
-        if (err) return done(err);
-        assert.isTrue(res.body.ok, "respuesta debe ser ok")
-        assert.equal(res.body.message, "OK", "El mensaje deb ser OK")
-        assert(res.body.data, "debe haber informacion de respuesta")
-        assert(res.body.data.user, "debe haber informacion del usuario")
-        assert(res.body.data.token, "debe haber informacion del token")
+        if (err) return done(err)
+        assert.isTrue(res.body.ok, 'respuesta debe ser ok')
+        assert.equal(res.body.message, 'OK', 'El mensaje deb ser OK')
+        assert(res.body.data, 'debe haber informacion de respuesta')
+        assert(res.body.data.user, 'debe haber informacion del usuario')
+        assert(res.body.data.token, 'debe haber informacion del token')
         assert.deepEqual(res.body.data.user, userFixtures.single1ToDb.toJSON())
-        done();
-      });
+        done()
+      })
   })
 })

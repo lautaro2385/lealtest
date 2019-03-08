@@ -5,11 +5,11 @@ module.exports = {
     database: process.env.DB_NAME_TR,
     host: process.env.DB_HOST_TR,
     port: process.env.DB_PORT_TR,
-    dialect: 'mysql',
+    dialect: 'mysql'
   },
   test: {
-    dialect: "sqlite",
-    storage: ":memory:",
+    dialect: 'sqlite',
+    storage: ':memory:',
     logging: () => { }
   },
   production: {
@@ -21,4 +21,4 @@ module.exports = {
     dialect: 'mysql',
     use_env_variable: 'DATABASE_URL'
   }
-};
+}

@@ -8,7 +8,7 @@ const Joi = BaseJoi.extend(Extension)
  */
 const transactionCreateSchema = Joi.object({
   value: Joi.number().required(),
-  points: Joi.number().integer().required(),
+  points: Joi.number().integer().required()
 })
 
 module.exports = {
