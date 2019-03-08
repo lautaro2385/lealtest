@@ -2,71 +2,52 @@
 const BaseJoi = require('joi')
 const Extension = require('joi-date-extensions')
 const Joi = BaseJoi.extend(Extension)
-const { userRegisterSchema } = require('./model/user.model');
-const { loginSchema } = require('./model/login.model');
+const { transactionCreateSchema } = require('./model/transaction.model');
 const model = require('../db/model');
-const md5 = require('md5');
-const bcrypt = require('bcrypt-nodejs')
 const createError = require('http-errors')
-const jwt = require('../config/jwt');
 
 const paramSchema = {
   abortEarly: false,
   allowUnknown: true,
   stripUnknown: true
 };
+
 /**
- * Registra un usuario en la base de datos,
- * si el usuario ya existe devuelve un error
+ * REgistra una trasnsacción
  * @param {*} createModel 
  */
-async function register(createModel) {
-  // valida la integridad de los datos del usuario
-  createModel = await Joi.validate(createModel, userRegisterSchema, paramSchema);
-  // el id es el md5 del correo
-  createModel.user_id = md5(createModel.email);
-
-  // revisa si el usuario existe 
-  const usr = await model.user.findByUserId(createModel.user_id);
-
-  if (usr) {
-    throw createError.Conflict('El usuario ya existe!')
-  }
-  // Hash a password
-  var hash = bcrypt.hashSync(createModel.password)
-  createModel.password = hash
-  return model.user.create(createModel)
+async function create(id, createModel) {
+  // valida la integridad de los datos de la transacció
+  createModel = await Joi.validate(createModel, transactionCreateSchema, paramSchema);
+  // por difault el estado es 1
+  createModel.status = 1
+  // se asocia al suaurio de la solicitus
+  createModel.user_id = id
+  return model.transaction.create(createModel)
 }
 
 /**
- * Realiza la validación del login del usuario y la generación del token
- * @param {*} modelLogin 
+ * Cambia el estado de una trasnsacción a 0
+ * @param {*} id 
  */
-async function login(modelLogin) {
-  // valida la integridad de los datos del usuario
-  modelLogin = await Joi.validate(modelLogin, loginSchema);
-  const id = md5(modelLogin.email);
-  // revisa si el usuario no existe 
-  const usr = await model.user.findByUserId(id);
-  if (!usr) {
-    throw createError.Unauthorized('usuario y/o contraseña inválida')
-  }
+async function inactivate(id) {
+  const tr = await model.transaction.findById(id)
+  if (!tr)
+    throw createError.BadRequest(`Transacción con id ${id} no encontrada`)
+  return model.transaction.update(id, { status: 0 })
+}
 
-  const val = bcrypt.compareSync(modelLogin.password, usr.password);
-  // si no son iguales las contraseñas
-  if (!val) {
-    throw createError.Unauthorized('usuario y/o contraseña inválida')
-  }
-  //genera token
-  let token = jwt.createToken(usr);
-  let resp = { user: usr };
-  if (usr.toJSON)
-    resp.user = Object.assign({}, usr.toJSON());
-  resp.token = token;
-  return resp
+function getHistory(idUser, limit, page) {
+  return model.transaction.findPaginationByUserId(idUser, limit, page)
+}
+
+function getPoints(idUser) {
+  return model.transaction.sumPoints({ user_id: idUser, status: 1 })
 }
 
 module.exports = {
-  register,
-  login
+  create,
+  inactivate,
+  getHistory,
+  getPoints
 }

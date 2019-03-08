@@ -2,33 +2,35 @@
 const express = require('express')
 const asyncify = require('express-asyncify')
 const controller = require('../controller/transaction.controller')
-const { buildOkResponse, buildCreatedResponse } = require('../util/util-response');
+const pagination = require('./middleware/pagination.mdw')
+const { verifyToken } = require('./middleware/autenticacion.mdw');
+const { buildOkResponse, buildCreatedResponse, buildOkPaginationResponse } = require('../util/util-response');
 
 const api = asyncify(express.Router())
 
-api.get('/transaction', search)
-api.get('/transaction/history', getHistory)
-api.post('/transaction', create)
-api.delete('/transaction/:id', inactivate)
+api.get('/transaction/point', [verifyToken, pagination], getPoints)
+api.get('/transaction/history', [verifyToken, pagination], getHistory)
+api.post('/transaction', verifyToken, create)
+api.delete('/transaction/:id', verifyToken, inactivate)
 
-async function search(req, res) {
-  let data = await controller.search(req.query)
-  buildOkResponse(res, data)
+async function getPoints(req, res) {
+  let data = await controller.getPoints(req.usr.sub)
+  data = isNaN(data) ? 0 : data
+  buildOkResponse(res, { total: data })
 }
 
 async function getHistory(req, res) {
-  let data = await controller.getHistory()
-  buildOkResponse(res, data)
+  let data = await controller.getHistory(req.usr.sub, req.limit, req.page)
+  buildOkPaginationResponse(res, data)
 }
 
 async function inactivate(req, res) {
-  let data = await controller.login(req.body)
+  let data = await controller.inactivate(req.params.id)
   buildOkResponse(res, data)
 }
 
 async function create(req, res) {
-  const createModel = req.body
-  let resp = await controller.register(createModel)
+  let resp = await controller.create(req.usr.sub, req.body)
   buildCreatedResponse(res, resp)
 }
 

@@ -6,7 +6,7 @@ const moment = require('moment');
 module.exports = function (config) {
   const sequelize = setupDatabase(config)
   const Transaction = sequelize.define('transaction', {
-    trasaction_id: {
+    transaction_id: {
       type: Sequelize.INTEGER,
       autoIncrement: true,
       primaryKey: true
@@ -42,7 +42,6 @@ module.exports = function (config) {
     delete values.password;
     if (values.updated_date) { values.updated_date = moment(values.updated_date).format(FORMAT_DATETIME); }
     if (values.created_date) { values.created_date = moment(values.created_date).format(FORMAT_DATETIME); }
-    if (values.value) { values.value = values.value.toFix(2); }
     return values;
   }
   return Transaction
