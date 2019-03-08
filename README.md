@@ -24,6 +24,11 @@ Dadas la funcionalidades, se agrupan en dos micro servicios:
 ## Ejecución
 A continucación se describen los comandos para iniciar los proyectos en modo de pruebas, desarrollo y producción. para la ejecucion de estos comandos se debe estar en la raiz del proyecto a iniciar.
 
+Para instalar los paquetes necesarios, se deb ejecutar:
+~~~~
+npm i
+~~~~
+
 Para iniciar el servicio en modo de desarrollo, se deb ejecutar:
 ~~~~
 npm run start-dev
@@ -73,3 +78,15 @@ Los puertos habilitados para el desarrollo son:
 
 ## Seguridad
 Para la seguridad de los servicios se implementa JWT. todas la rutas estan aseguradas a excepción de la de regitro y login. es decir, todas las rutas de transacciones, estan aseguradas por el token.
+
+## Arquitectura
+La arquitectura u organización del código es la siguiente:
+* __./test__: están los test reslizados
+* __./routes__: se define las rutas del api
+* __./controller__: archivos que tienen toda la lógica del negocio
+* __./db__: contiene los archivos de configuracion de la base de datos
+  * __dao__: se explonen las operaciones que se pueden hacer sobre la db.
+  * __model__: define el modelo o la entidad de la base de datos
+* __./config__: archivos de configuración de la aplicación
+* __./util__: archivos de utilidades de la aplicación
+  
