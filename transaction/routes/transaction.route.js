@@ -8,10 +8,10 @@ const { buildOkResponse, buildCreatedResponse, buildOkPaginationResponse } = req
 
 const api = asyncify(express.Router())
 
-api.get('/transaction/point', [verifyToken, pagination], getPoints)
-api.get('/transaction/history', [verifyToken, pagination], getHistory)
-api.post('/transaction', verifyToken, create)
-api.delete('/transaction/:id', verifyToken, inactivate)
+api.get('/point', [verifyToken, pagination], getPoints)
+api.get('/history', [verifyToken, pagination], getHistory)
+api.post('/', verifyToken, create)
+api.delete('/:id', verifyToken, inactivate)
 
 async function getPoints(req, res) {
   let data = await controller.getPoints(req.usr.sub)

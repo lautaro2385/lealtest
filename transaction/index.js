@@ -35,7 +35,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 // Rutasbase
-app.use(require('./routes/transaction.route'))
+app.use('/transaction', require('./routes/transaction.route'))
 
 app.use((err, req, res, next) => {
   debug(`Error: ${err}`)

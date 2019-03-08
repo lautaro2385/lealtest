@@ -64,7 +64,7 @@ module.exports = function setupUser(TransactionModel) {
 
   async function update(id, model) {
     await TransactionModel.update(model, { returning: true, where: { transaction_id: id } });
-    return findById(id)
+    findById(id)
   }
 
   function sumPoints(condition) {

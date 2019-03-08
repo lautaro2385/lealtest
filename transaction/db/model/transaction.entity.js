@@ -38,8 +38,6 @@ module.exports = function (config) {
     })
   Transaction.prototype.toJSON = function () {
     var values = Object.assign({}, this.get());
-    // evita que el password se devuelva en alguna llamada no deseada
-    delete values.password;
     if (values.updated_date) { values.updated_date = moment(values.updated_date).format(FORMAT_DATETIME); }
     if (values.created_date) { values.created_date = moment(values.created_date).format(FORMAT_DATETIME); }
     return values;
