@@ -49,6 +49,7 @@ las variables de conexión a la bases de datos se encuentran en:
 ./config/config.js
 ~~~~
 con las variables de entorno:
+
 |   Descripción   | user variables | user default | transaction variables | transaction default |
 | :-------------: | :------------: | :----------: | :-------------------: | :-----------------: |
 |     Usuario     |    DB_USER     |     root     |      DB_USER_TR       |        root         |
