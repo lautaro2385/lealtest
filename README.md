@@ -57,3 +57,6 @@ con las variables de entorno:
 |     Puerto      |    DB_PORT     |     3307     |      DB_PORT_TR       |        3307         |
 |      Host       |    DB_HOST     |  localhost   |      DB_HOST_TR       |      localhost      |
 | Nombre de la DB |    DB_NAME     |  leal_user   |      DB_NAME_TR       |  leal_transaction   |
+
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/8f82301e78f91a9d37d9)
