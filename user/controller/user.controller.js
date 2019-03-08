@@ -1,4 +1,5 @@
 'use strict'
+const _ = require('underscore')
 const BaseJoi = require('joi')
 const Extension = require('joi-date-extensions')
 const Joi = BaseJoi.extend(Extension)
@@ -62,6 +63,7 @@ async function login(modelLogin) {
   let resp = { user: usr };
   if (usr.toJSON)
     resp.user = Object.assign({}, usr.toJSON());
+  resp.user = _.omit(resp.user, ['password'])
   resp.token = token;
   return resp
 }
