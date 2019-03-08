@@ -40,7 +40,7 @@ npm test
 ~~~~
 
 ### Base de datos
-Para cada se creó una base de datos, los script de creación de las base de datos, se puene encontrar en:
+Se utiliza para desarrollo y producción un motor de base de datos MySql. Para cada se creó una base de datos, los script de creación de las base de datos, se puene encontrar en:
 ~~~~
 ./sql/create.sql
 ~~~~
@@ -70,3 +70,6 @@ Los puertos habilitados para el desarrollo son:
 * __transacciones:__ 3001
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/8f82301e78f91a9d37d9)
+
+## Seguridad
+Para la seguridad de los servicios se implementa JWT. todas la rutas estan aseguradas a excepción de la de regitro y login. es decir, todas las rutas de transacciones, estan aseguradas por el token.
