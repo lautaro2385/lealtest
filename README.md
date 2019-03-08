@@ -38,3 +38,21 @@ Para realizar las pruebas, se deb ejecutar:
 ~~~~
 npm test
 ~~~~
+
+### Base de datos
+Para cada se creó una base de datos, los script de creación de las base de datos, se puene encontrar en:
+~~~~
+./sql/create.sql
+~~~~
+las variables de conexión a la bases de datos se encuentran en:
+~~~~
+./config/config.js
+~~~~
+con las variables de entorno:
+|   Descripción   | user variables | user default | transaction variables | transaction default |
+| :-------------: | :------------: | :----------: | :-------------------: | :-----------------: |
+|     Usuario     |    DB_USER     |     root     |      DB_USER_TR       |        root         |
+|   Contraseña    |     DB_PSW     |     root     |       DB_PSW_TR       |        root         |
+|     Puerto      |    DB_PORT     |     3307     |      DB_PORT_TR       |        3307         |
+|      Host       |    DB_HOST     |  localhost   |      DB_HOST_TR       |      localhost      |
+| Nombre de la DB |    DB_NAME     |  leal_user   |      DB_NAME_TR       |  leal_transaction   |
