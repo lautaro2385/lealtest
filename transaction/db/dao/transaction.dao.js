@@ -15,18 +15,16 @@ module.exports = function setupUser(TransactionModel) {
     return TransactionModel.findByPk(id);
   }
 
-  function findByUserId(userId, limit, offset) {
-    limit = limit || 50
-    offset = offset || 0
+  function findByUserId(userId) {
     return TransactionModel.findAll({
-      limit,
-      offset,
       where: {
         user_id: userId
       },
       order: [
-        ['created_date', 'DESC']
-      ]
+        ['created_date', 'DESC'],
+        ['transaction_id', 'DESC']
+      ],
+      raw: true
     });
   }
 

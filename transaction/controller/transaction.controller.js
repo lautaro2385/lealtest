@@ -41,6 +41,10 @@ function getHistory(idUser, limit, page) {
   return model.transaction.findPaginationByUserId(idUser, limit, page)
 }
 
+function getAll(idUser) {
+  return model.transaction.findByUserId(idUser)
+}
+
 function getPoints(idUser) {
   return model.transaction.sumPoints({ user_id: idUser, status: 1 })
 }
@@ -49,5 +53,6 @@ module.exports = {
   create,
   inactivate,
   getHistory,
-  getPoints
+  getPoints,
+  getAll
 }

@@ -13,6 +13,10 @@ exports.verifyToken = function (req, res, next) {
 	if (token && token.startsWith("Bearer ")) {
 		token = token.substring(7)
 	}
+	// si no hay token definido en la cabecera se revisa si esta en paramtroe de query
+	if (!token) {
+		token = req.query.token;
+	}
 	verifyTokenFn(token, res, req, next);
 };
 
